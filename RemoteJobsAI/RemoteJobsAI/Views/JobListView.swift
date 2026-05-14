@@ -4,6 +4,7 @@ struct JobListView: View {
     @EnvironmentObject var jobsVM: JobsViewModel
     @State private var showFilterSheet = false
     @State private var selectedJob: Job? = nil
+    @State private var showJobDetail = false
 
     var body: some View {
         Group {
@@ -30,9 +31,12 @@ struct JobListView: View {
         .refreshable {
             await jobsVM.fetchJobs()
         }
-        .navigationDestination(item: $selectedJob) { job in
-            JobDetailView(job: job)
-        }
+        .background(
+            NavigationLink(
+                destination: selectedJob.map { job in AnyView(JobDetailView(job: job)) } ?? AnyView(EmptyView()),
+                isActive: $showJobDetail
+            ) { EmptyView() }
+        )
     }
 
     // MARK: - Jobs List

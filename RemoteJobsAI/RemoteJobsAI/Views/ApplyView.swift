@@ -256,7 +256,7 @@ struct ApplyView: View {
                             .onAppear {
                                 editableCoverLetter = profileVM.generatedCoverLetter
                             }
-                            .onChange(of: profileVM.generatedCoverLetter) { _, newValue in
+                            .onChange(of: profileVM.generatedCoverLetter) { newValue in
                                 editableCoverLetter = newValue
                             }
 

@@ -26,6 +26,7 @@
 		AA100017000000000000000A /* JobFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA200017000000000000000A /* JobFilter.swift */; };
 		AA100018000000000000000A /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA200018000000000000000A /* UserProfile.swift */; };
 		AA100019000000000000000A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA200019000000000000000A /* Info.plist */; };
+		AA100020000000000000000A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA200020000000000000000A /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		AA200017000000000000000A /* JobFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobFilter.swift; sourceTree = "<group>"; };
 		AA200018000000000000000A /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		AA200019000000000000000A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA200020000000000000000A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AA000003000000000000000A /* RemoteJobsAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemoteJobsAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -67,6 +69,7 @@
 			children = (
 				AA200001000000000000000A /* RemoteJobsAIApp.swift */,
 				AA200019000000000000000A /* Info.plist */,
+				AA200020000000000000000A /* Extensions.swift */,
 				AAGP001000000000000000AA /* Models */,
 				AAGP002000000000000000AA /* Views */,
 				AAGP004000000000000000AA /* ViewModels */,
@@ -230,6 +233,7 @@
 				AA100016000000000000000A /* Job.swift in Sources */,
 				AA100017000000000000000A /* JobFilter.swift in Sources */,
 				AA100018000000000000000A /* UserProfile.swift in Sources */,
+				AA100020000000000000000A /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

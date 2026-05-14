@@ -68,7 +68,7 @@ struct JobCardView: View {
                         Text(salary)
                             .font(.caption)
                             .fontWeight(.semibold)
-                            .foregroundColor(Color("AccentBlue"))
+                            .foregroundColor(Color(hex: "1a237e"))
                     }
                 }
 

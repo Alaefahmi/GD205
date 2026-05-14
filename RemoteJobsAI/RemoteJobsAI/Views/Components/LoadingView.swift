@@ -191,7 +191,8 @@ struct AILoadingView: View {
                 Image(systemName: "brain.head.profile")
                     .font(.system(size: 32))
                     .foregroundColor(.accentColor)
-                    .symbolEffect(.pulse)
+                    .scaleEffect(dotCount == 1 ? 1.1 : 1.0)
+                    .animation(.easeInOut(duration: 0.4).repeatForever(autoreverses: true), value: dotCount)
             }
 
             VStack(spacing: 6) {
