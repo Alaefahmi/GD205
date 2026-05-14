@@ -5,6 +5,7 @@ struct SearchView: View {
     @State private var isSearchFocused = false
     @State private var selectedJob: Job? = nil
     @State private var showFilterSheet = false
+    @State private var showJobDetail = false
 
     private let popularCategories = JobCategory.popular
 
@@ -48,8 +49,10 @@ struct SearchView: View {
                     Task { await jobsVM.applyFilter(newFilter) }
                 }
             }
-            .navigationDestination(item: $selectedJob) { job in
-                JobDetailView(job: job)
+            .navigationDestination(isPresented: $showJobDetail) {
+                if let job = selectedJob {
+                    JobDetailView(job: job)
+                }
             }
         }
     }
@@ -155,7 +158,10 @@ struct SearchView: View {
                         JobCardView(
                             job: job,
                             onSave: { jobsVM.toggleSave(job: job) },
-                            onTap: { selectedJob = job }
+                            onTap: {
+                                selectedJob = job
+                                showJobDetail = true
+                            }
                         )
                         .padding(.horizontal, 16)
                     }
@@ -273,7 +279,7 @@ struct SearchView: View {
     private var trendingJobsList: some View {
         LazyVStack(spacing: 10) {
             ForEach(Array(JobService.mockJobs.prefix(8).enumerated()), id: \.offset) { index, job in
-                Button(action: { selectedJob = job }) {
+                Button(action: { selectedJob = job; showJobDetail = true }) {
                     HStack(spacing: 14) {
                         Text("#\(index + 1)")
                             .font(.system(size: 14, weight: .bold))

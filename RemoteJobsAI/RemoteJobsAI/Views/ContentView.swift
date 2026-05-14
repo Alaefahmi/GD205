@@ -66,6 +66,7 @@ struct ApplicationsView: View {
     @EnvironmentObject var jobsVM: JobsViewModel
     @State private var selectedFilter: ApplicationStatus? = nil
     @State private var selectedJob: Job? = nil
+    @State private var showJobDetail = false
 
     private var displayedJobs: [Job] {
         if let filter = selectedFilter {
@@ -90,8 +91,10 @@ struct ApplicationsView: View {
             }
             .navigationTitle("Applications")
             .navigationBarTitleDisplayMode(.large)
-            .navigationDestination(item: $selectedJob) { job in
-                JobDetailView(job: job)
+            .navigationDestination(isPresented: $showJobDetail) {
+                if let job = selectedJob {
+                    JobDetailView(job: job)
+                }
             }
         }
     }
@@ -178,7 +181,7 @@ struct ApplicationsView: View {
     }
 
     private func applicationCard(_ job: Job) -> some View {
-        Button(action: { selectedJob = job }) {
+        Button(action: { selectedJob = job; showJobDetail = true }) {
             HStack(spacing: 14) {
                 // Status indicator
                 VStack {

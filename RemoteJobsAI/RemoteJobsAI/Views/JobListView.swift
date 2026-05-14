@@ -31,12 +31,11 @@ struct JobListView: View {
         .refreshable {
             await jobsVM.fetchJobs()
         }
-        .background(
-            NavigationLink(
-                destination: selectedJob.map { job in AnyView(JobDetailView(job: job)) } ?? AnyView(EmptyView()),
-                isActive: $showJobDetail
-            ) { EmptyView() }
-        )
+        .navigationDestination(isPresented: $showJobDetail) {
+            if let job = selectedJob {
+                JobDetailView(job: job)
+            }
+        }
     }
 
     // MARK: - Jobs List
@@ -65,7 +64,10 @@ struct JobListView: View {
                     JobCardView(
                         job: job,
                         onSave: { jobsVM.toggleSave(job: job) },
-                        onTap: { selectedJob = job }
+                        onTap: {
+                            selectedJob = job
+                            showJobDetail = true
+                        }
                     )
                     .padding(.horizontal, 16)
                     .onAppear {

@@ -6,45 +6,31 @@ struct UserProfile: Codable, Equatable {
     var email: String
     var phone: String
     var linkedinURL: String
-    /// Behance or Dribbble portfolio URL (primary creative portfolio link)
+    var githubURL: String
     var portfolioURL: String
-    /// Secondary portfolio or personal design website
-    var websiteURL: String
     var headline: String
     var summary: String
     var education: Education
     var skills: [String]
-    /// Self-rated proficiency (0.0–1.0) for each primary design tool
-    var toolProficiency: [String: Double]
     var experiences: [WorkExperience]
     var resumeText: String
     var avatarData: Data?
 
     static var sample: UserProfile {
         UserProfile(
-            name: "Maya Rivera",
-            email: "maya.rivera@email.com",
-            phone: "+1 (555) 487-2910",
-            linkedinURL: "https://linkedin.com/in/mayariveradesigns",
-            portfolioURL: "https://behance.net/mayarivera",
-            websiteURL: "https://mayarivera.design",
-            headline: "Junior Graphic Designer · Branding & UI · Open to Remote",
-            summary: "Creative and detail-oriented graphic designer with a Bachelor's degree in Visual Communication Design. Passionate about crafting bold brand identities, intuitive UI layouts, and eye-catching digital assets. Seeking entry-level or junior roles where I can grow within a collaborative creative team.",
+            name: "Alex Johnson",
+            email: "alex.johnson@email.com",
+            phone: "+1 (555) 234-5678",
+            linkedinURL: "https://linkedin.com/in/alexjohnson",
+            githubURL: "https://github.com/alexjohnson",
+            portfolioURL: "https://alexjohnson.dev",
+            headline: "Software Engineer | Remote Work Enthusiast",
+            summary: "Motivated software engineer with a bachelor's degree in Computer Science. Experienced in building scalable web and mobile applications. Passionate about clean code, user experience, and continuous learning.",
             education: Education.bachelorSample,
             skills: [
-                "Figma", "Adobe Illustrator", "Adobe Photoshop",
-                "Adobe InDesign", "After Effects", "Canva",
-                "Sketch", "Procreate", "Adobe XD",
-                "Typography", "Brand Identity", "UI Design",
-                "Motion Graphics", "Print Production", "Colour Theory"
-            ],
-            toolProficiency: [
-                "Figma": 0.90,
-                "Adobe Illustrator": 0.85,
-                "Adobe Photoshop": 0.80,
-                "Adobe InDesign": 0.75,
-                "After Effects": 0.60,
-                "Canva": 0.95
+                "Swift", "SwiftUI", "Python", "JavaScript", "TypeScript",
+                "React", "Node.js", "REST APIs", "Git", "SQL", "AWS",
+                "Docker", "Agile", "Unit Testing", "CI/CD"
             ],
             experiences: WorkExperience.sampleList,
             resumeText: UserProfile.sampleResumeText,
@@ -58,13 +44,12 @@ struct UserProfile: Codable, Equatable {
             email: "",
             phone: "",
             linkedinURL: "",
+            githubURL: "",
             portfolioURL: "",
-            websiteURL: "",
             headline: "",
             summary: "",
             education: Education.empty,
             skills: [],
-            toolProficiency: [:],
             experiences: [],
             resumeText: "",
             avatarData: nil
@@ -77,12 +62,11 @@ struct UserProfile: Codable, Equatable {
 
     var completionPercentage: Double {
         var filled = 0
-        let total = 9
+        let total = 8
         if !name.isEmpty        { filled += 1 }
         if !email.isEmpty       { filled += 1 }
         if !phone.isEmpty       { filled += 1 }
         if !linkedinURL.isEmpty { filled += 1 }
-        if !portfolioURL.isEmpty { filled += 1 }
         if !summary.isEmpty     { filled += 1 }
         if !skills.isEmpty      { filled += 1 }
         if !experiences.isEmpty { filled += 1 }
@@ -102,12 +86,12 @@ struct Education: Codable, Equatable {
 
     static var bachelorSample: Education {
         Education(
-            degree: "Bachelor of Fine Arts",
-            major: "Visual Communication Design",
-            institution: "Rhode Island School of Design",
-            graduationYear: 2024,
-            gpa: "3.8",
-            honors: "Cum Laude"
+            degree: "Bachelor of Science",
+            major: "Computer Science",
+            institution: "University of California, Berkeley",
+            graduationYear: 2022,
+            gpa: "3.7",
+            honors: "Magna Cum Laude"
         )
     }
 
@@ -142,30 +126,29 @@ struct WorkExperience: Codable, Equatable, Identifiable {
         [
             WorkExperience(
                 id: UUID().uuidString,
-                title: "Graphic Design Intern",
-                company: "Bright Studio Co.",
-                startDate: "Jun 2023",
-                endDate: "Dec 2023",
-                isCurrent: false,
-                description: "Contributed to branding and digital design projects for small-business clients at a boutique creative agency.",
+                title: "Junior Software Engineer",
+                company: "TechStart Inc.",
+                startDate: "Jun 2022",
+                endDate: "Present",
+                isCurrent: true,
+                description: "Developing and maintaining iOS and web applications for a fast-growing SaaS startup.",
                 achievements: [
-                    "Designed logo and brand identity system for 4 client launches",
-                    "Produced social media templates in Canva and Figma adopted across 3 brand accounts",
-                    "Assisted art director with InDesign layout for a 32-page product catalogue"
+                    "Reduced app load time by 40% through caching optimizations",
+                    "Built reusable SwiftUI component library used across 3 products",
+                    "Collaborated with cross-functional teams in an agile environment"
                 ]
             ),
             WorkExperience(
                 id: UUID().uuidString,
-                title: "Freelance Visual Designer",
-                company: "Self-Employed",
-                startDate: "Jan 2024",
-                endDate: nil,
-                isCurrent: true,
-                description: "Independently delivering branding, print, and social media design for clients across e-commerce and hospitality sectors.",
+                title: "Software Engineering Intern",
+                company: "DataFlow Solutions",
+                startDate: "May 2021",
+                endDate: "Aug 2021",
+                isCurrent: false,
+                description: "Contributed to backend Python services and data pipeline development.",
                 achievements: [
-                    "Built complete brand identity (logo, colour palette, typography, guidelines) for 6 clients",
-                    "Created motion graphics reels for Instagram that averaged 40% higher engagement",
-                    "Maintained 5-star rating on portfolio and client referral platforms"
+                    "Automated data ingestion pipeline saving 8 hours/week of manual work",
+                    "Wrote unit tests achieving 85% code coverage on new modules"
                 ]
             )
         ]
@@ -175,36 +158,32 @@ struct WorkExperience: Codable, Equatable, Identifiable {
 // MARK: - Resume Text Sample
 extension UserProfile {
     static let sampleResumeText = """
-    MAYA RIVERA
-    maya.rivera@email.com | +1 (555) 487-2910
-    linkedin.com/in/mayariveradesigns | behance.net/mayarivera | mayarivera.design
+    ALEX JOHNSON
+    alex.johnson@email.com | +1 (555) 234-5678
+    linkedin.com/in/alexjohnson | github.com/alexjohnson
 
     SUMMARY
-    Creative and detail-oriented graphic designer with a BFA in Visual Communication Design from RISD. Skilled in brand identity, UI design, and motion graphics. Seeking entry-level or junior design roles with a forward-thinking creative team. Portfolio: behance.net/mayarivera | Dribbble: dribbble.com/mayarivera
+    Motivated software engineer with a Bachelor's degree in Computer Science from UC Berkeley. Experienced in building scalable web and mobile applications with 2+ years of professional experience. Passionate about remote work, clean code, and delivering impactful user experiences.
 
     EDUCATION
-    Bachelor of Fine Arts in Visual Communication Design
-    Rhode Island School of Design | 2024 | GPA: 3.8 | Cum Laude
+    Bachelor of Science in Computer Science
+    University of California, Berkeley | 2022 | GPA: 3.7 | Magna Cum Laude
 
     EXPERIENCE
-    Freelance Visual Designer | Jan 2024 – Present
-    • Designed complete brand identities (logo, colour palette, typography, brand guidelines) for 6 clients
-    • Created motion graphics reels for Instagram averaging 40% higher engagement than static posts
-    • Maintained 5-star client satisfaction through clear communication and on-time delivery
+    Junior Software Engineer – TechStart Inc. | Jun 2022 – Present
+    • Developing and maintaining iOS and web applications for a fast-growing SaaS startup
+    • Reduced app load time by 40% through caching optimizations
+    • Built reusable SwiftUI component library used across 3 products
 
-    Graphic Design Intern – Bright Studio Co. | Jun 2023 – Dec 2023
-    • Contributed to branding and digital projects for small-business clients at a boutique creative agency
-    • Designed logo and identity systems for 4 client brand launches
-    • Produced Canva and Figma social media templates adopted across 3 active brand accounts
-    • Assisted art director with InDesign layout and prepress for a 32-page product catalogue
+    Software Engineering Intern – DataFlow Solutions | May 2021 – Aug 2021
+    • Automated data ingestion pipeline saving 8 hours/week
+    • Wrote unit tests achieving 85% code coverage
 
-    SKILLS & TOOLS
-    Figma, Adobe Illustrator, Adobe Photoshop, Adobe InDesign, After Effects, Canva, Sketch, Procreate, Adobe XD
-    Typography · Brand Identity · UI Design · Motion Graphics · Print Production · Colour Theory
+    SKILLS
+    Swift, SwiftUI, Python, JavaScript, TypeScript, React, Node.js, REST APIs, Git, SQL, AWS, Docker, Agile, Unit Testing, CI/CD
 
-    PORTFOLIO
-    Behance: behance.net/mayarivera
-    Dribbble: dribbble.com/mayarivera
-    Website: mayarivera.design
+    CERTIFICATIONS
+    • AWS Certified Cloud Practitioner (2023)
+    • Apple Developer Academy Graduate (2022)
     """
 }
