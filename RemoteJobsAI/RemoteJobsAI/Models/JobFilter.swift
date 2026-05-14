@@ -11,7 +11,7 @@ struct JobFilter: Equatable {
     var sources: Set<JobSource>
     var postedWithinDays: Int?
 
-    // Default filter optimised for remote entry-level search
+    // Default filter optimised for remote entry-level & junior graphic design search
     static var `default`: JobFilter {
         JobFilter(
             keywords: "",
@@ -19,7 +19,7 @@ struct JobFilter: Equatable {
             minSalary: nil,
             maxSalary: nil,
             jobTypes: [.remote],
-            experienceLevels: [.entryLevel],
+            experienceLevels: [.entryLevel, .junior],
             sources: Set(JobSource.allCases),
             postedWithinDays: 30
         )
@@ -47,7 +47,7 @@ struct JobFilter: Equatable {
         if location != "Remote" && !location.isEmpty { count += 1 }
         if minSalary != nil || maxSalary != nil { count += 1 }
         if jobTypes != [.remote] { count += 1 }
-        if experienceLevels != [.entryLevel] { count += 1 }
+        if experienceLevels != [.entryLevel, .junior] { count += 1 }
         if sources != Set(JobSource.allCases) { count += 1 }
         if postedWithinDays != 30 { count += 1 }
         return count
@@ -67,36 +67,36 @@ struct JobFilter: Equatable {
     }
 }
 
-// MARK: - SalaryRange presets
+// MARK: - SalaryRange presets (calibrated for entry-level & junior design roles)
 enum SalaryPreset: String, CaseIterable, Identifiable {
-    case any = "Any"
-    case under50k = "Under $50K"
-    case range50to80 = "$50K – $80K"
-    case range80to100 = "$80K – $100K"
-    case range100to150 = "$100K – $150K"
-    case over150k = "$150K+"
+    case any          = "Any"
+    case under40k     = "Under $40K"
+    case range40to55  = "$40K – $55K"
+    case range55to70  = "$55K – $70K"
+    case range70to90  = "$70K – $90K"
+    case over90k      = "$90K+"
 
     var id: String { rawValue }
 
     var min: Int? {
         switch self {
-        case .any: return nil
-        case .under50k: return nil
-        case .range50to80: return 50_000
-        case .range80to100: return 80_000
-        case .range100to150: return 100_000
-        case .over150k: return 150_000
+        case .any:         return nil
+        case .under40k:    return nil
+        case .range40to55: return 40_000
+        case .range55to70: return 55_000
+        case .range70to90: return 70_000
+        case .over90k:     return 90_000
         }
     }
 
     var max: Int? {
         switch self {
-        case .any: return nil
-        case .under50k: return 50_000
-        case .range50to80: return 80_000
-        case .range80to100: return 100_000
-        case .range100to150: return 150_000
-        case .over150k: return nil
+        case .any:         return nil
+        case .under40k:    return 40_000
+        case .range40to55: return 55_000
+        case .range55to70: return 70_000
+        case .range70to90: return 90_000
+        case .over90k:     return nil
         }
     }
 }
@@ -111,14 +111,15 @@ struct JobCategory: Identifiable {
 }
 
 extension JobCategory {
+    /// Graphic-design-focused browse categories shown on the home/explore screen.
     static let popular: [JobCategory] = [
-        JobCategory(name: "Software", icon: "laptopcomputer", keyword: "software engineer", color: "blue"),
-        JobCategory(name: "Design", icon: "paintpalette.fill", keyword: "UX designer", color: "purple"),
-        JobCategory(name: "Data", icon: "chart.bar.fill", keyword: "data analyst", color: "green"),
-        JobCategory(name: "Marketing", icon: "megaphone.fill", keyword: "digital marketer", color: "orange"),
-        JobCategory(name: "Finance", icon: "dollarsign.circle.fill", keyword: "financial analyst", color: "teal"),
-        JobCategory(name: "Writing", icon: "pencil.and.outline", keyword: "content writer", color: "pink"),
-        JobCategory(name: "PM", icon: "list.bullet.clipboard.fill", keyword: "project manager", color: "red"),
-        JobCategory(name: "Sales", icon: "chart.line.uptrend.xyaxis", keyword: "sales manager", color: "indigo"),
+        JobCategory(name: "UI/UX",      icon: "rectangle.on.rectangle",      keyword: "UI UX designer",      color: "blue"),
+        JobCategory(name: "Branding",   icon: "sparkles",                     keyword: "brand designer",      color: "pink"),
+        JobCategory(name: "Motion",     icon: "film.fill",                    keyword: "motion designer",     color: "orange"),
+        JobCategory(name: "Illustration", icon: "pencil.tip.crop.circle",     keyword: "illustrator",         color: "green"),
+        JobCategory(name: "Web Design", icon: "globe",                        keyword: "web designer",        color: "teal"),
+        JobCategory(name: "Print",      icon: "printer.fill",                 keyword: "print designer",      color: "red"),
+        JobCategory(name: "Social",     icon: "square.grid.2x2.fill",         keyword: "social media designer", color: "indigo"),
+        JobCategory(name: "Logo",       icon: "a.circle.fill",                keyword: "logo designer",       color: "purple"),
     ]
 }
