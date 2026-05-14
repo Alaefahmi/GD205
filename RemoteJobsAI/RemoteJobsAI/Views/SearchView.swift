@@ -251,11 +251,11 @@ struct SearchView: View {
                     VStack(spacing: 8) {
                         ZStack {
                             RoundedRectangle(cornerRadius: 14)
-                                .fill(Color(category.color).opacity(0.15))
+                                .fill(Color(categoryColor: category.color).opacity(0.15))
                                 .frame(width: 58, height: 58)
                             Image(systemName: category.icon)
                                 .font(.system(size: 24))
-                                .foregroundColor(Color(category.color))
+                                .foregroundColor(Color(categoryColor: category.color))
                         }
                         Text(category.name)
                             .font(.caption2)
